@@ -39,7 +39,49 @@ function barChart(data, subjectID){
 
 function bubbleChart(data, subjectID){
   console.log(`bubbleChart ${subjectID}`);
-}
+  let subjectSample = getSubjectSample(data, subjectID); 
+  const otuIDs = subjectSample.otu_ids.reverse();
+  const sampleValues = subjectSample.sample_values.reverse();
+  const otuLabels = subjectSample.otu_labels.reverse();
+
+  traces = {
+    x: otuIDs,
+    y: sampleValues,
+    mode: 'markers',
+    marker: {
+      size: sampleValues,
+      color: otuIDs,
+      colorscale: 'YlGnBu'
+    },
+    text: otuLabels,
+    type: 'scatter'
+  };
+
+  let data = [traces];
+
+  let layout = {
+    xaxis: {
+      title: 'OTU IDs'
+    },
+    yaxis: {
+      title: 'Sample Values'
+    }
+  };
+      
+  Plotly.newPlot("bubble-chart", data, layout);
+
+
+// Create a bubble chart that displays each sample.
+
+// Use otu_ids for the x values.
+
+// Use sample_values for the y values.
+
+// Use sample_values for the marker size.
+
+// Use otu_ids for the marker colors.
+
+// Use otu_labels for the text values.
 
 function metaData(data, subjectID){
   console.log(`metaData ${subjectID}`);
