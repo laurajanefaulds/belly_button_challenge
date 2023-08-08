@@ -70,21 +70,42 @@ function bubbleChart(data, subjectID){
   Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 }
 
-// Create a bubble chart that displays each sample.
+// function metaData(data, subjectID){
+//    console.log(`metaData ${subjectID}`);
+//    var demogs = data["metadata"].filter(subjectID);
+// //    var metadataList = d3.select("ul");
+// //    metadataList.append("ul").text(demogs.ethnicity);
+// let li2 = d3.select("ul").append("li").text(demogs.ethnicity);
+// }
 
-// Use otu_ids for the x values.
+// //   let li3 = d3.select("#sample-metadata").text(demogs.gender);
+// //   let li4 = d3.select("#sample-metadata").text(demogs.age);
+// //   let li5 = d3.select("#sample-metadata").text(demogs.location);
+// //   let li6 = d3.select("#sample-metadata").text(demogs.bbtype);
+// //   let li7 = d3.select("#sample-metadata").text(demogs.wfreq);
+  
 
-// Use sample_values for the y values.
+// //          <div id="sample-metadata" class="panel-body"></div>
 
-// Use sample_values for the marker size.
-
-// Use otu_ids for the marker colors.
-
-// Use otu_labels for the text values.
-
-function metaData(data, subjectID){
-  console.log(`metaData ${subjectID}`);
+function metaData(data, subjectID) {
+    console.log(`metaData ${subjectID}`);
+    var demogs = data["metadata"].find(item => item.id === subjectID);
+ 
+    // Clear the existing list content before appending new data
+    var metadataList = d3.select("ul");
+    metadataList.html(""); // Clear the existing content
+ 
+    // Append demographic information to the list
+    metadataList.append("li").text(`Ethnicity: ${demogs.ethnicity}`);
+    metadataList.append("li").text(`Gender: ${demogs.gender}`);
+    metadataList.append("li").text(`Age: ${demogs.age}`);
+    metadataList.append("li").text(`Location: ${demogs.location}`);
+    metadataList.append("li").text(`BB Type: ${demogs.bbtype}`);
+    metadataList.append("li").text(`WFreq: ${demogs.wfreq}`);
 }
+
+ 
+
 
 function updateVisuals(subjectID) {
   console.log(`updateVisuals ${subjectID}`);
@@ -100,7 +121,6 @@ function updateVisuals(subjectID) {
     metaData(data, subjectID);
   })
 }
-
 
 function popDrop(data) {
   var subjectIDs = data["names"];
