@@ -70,26 +70,13 @@ function bubbleChart(data, subjectID){
   Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 }
 
-// function metaData(data, subjectID){
-//    console.log(`metaData ${subjectID}`);
-//    var demogs = data["metadata"].filter(subjectID);
-// //    var metadataList = d3.select("ul");
-// //    metadataList.append("ul").text(demogs.ethnicity);
-// let li2 = d3.select("ul").append("li").text(demogs.ethnicity);
-// }
-
-// //   let li3 = d3.select("#sample-metadata").text(demogs.gender);
-// //   let li4 = d3.select("#sample-metadata").text(demogs.age);
-// //   let li5 = d3.select("#sample-metadata").text(demogs.location);
-// //   let li6 = d3.select("#sample-metadata").text(demogs.bbtype);
-// //   let li7 = d3.select("#sample-metadata").text(demogs.wfreq);
-  
-
-// //          <div id="sample-metadata" class="panel-body"></div>
-
 function metaData(data, subjectID) {
     console.log(`metaData ${subjectID}`);
-    var demogs = data["metadata"].find(item => item.id === subjectID);
+    var metadata = data.metadata;
+    var resultArray = metadata.filter(sampleObj => sampleObj.id == subjectID);
+    var demogs = resultArray[0];
+    // var demogs = data["metadata"].find(item => item.id === subjectID);
+    console.log(demogs);
  
     // Clear the existing list content before appending new data
     var metadataList = d3.select("ul");
@@ -103,9 +90,6 @@ function metaData(data, subjectID) {
     metadataList.append("li").text(`BB Type: ${demogs.bbtype}`);
     metadataList.append("li").text(`WFreq: ${demogs.wfreq}`);
 }
-
- 
-
 
 function updateVisuals(subjectID) {
   console.log(`updateVisuals ${subjectID}`);
