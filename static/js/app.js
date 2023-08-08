@@ -75,7 +75,6 @@ function metaData(data, subjectID) {
     var metadata = data.metadata;
     var resultArray = metadata.filter(sampleObj => sampleObj.id == subjectID);
     var demogs = resultArray[0];
-    // var demogs = data["metadata"].find(item => item.id === subjectID);
     console.log(demogs);
  
     // Clear the existing list content before appending new data
