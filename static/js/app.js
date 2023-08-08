@@ -9,7 +9,6 @@ function getSubjectSample(data, subjectID){
   return subjectSample;
 }
 
-
 function barChart(data, subjectID){
   console.log(`barChart ${subjectID}`);
   let subjectSample = getSubjectSample(data, subjectID); 
@@ -36,40 +35,40 @@ function barChart(data, subjectID){
   Plotly.newPlot("bar", traces, layout);
 }
 
-
 function bubbleChart(data, subjectID){
   console.log(`bubbleChart ${subjectID}`);
   let subjectSample = getSubjectSample(data, subjectID); 
-  const otuIDs = subjectSample.otu_ids.reverse();
-  const sampleValues = subjectSample.sample_values.reverse();
-  const otuLabels = subjectSample.otu_labels.reverse();
+  const otuIDs = subjectSample.otu_ids;
+  const sampleValues = subjectSample.sample_values;
+  const otuLabels = subjectSample.otu_labels;
 
-  traces = {
+  var bubbleData = [
+    {
     x: otuIDs,
     y: sampleValues,
-    mode: 'markers',
+    text: otuLabels,
+    mode: "markers",
     marker: {
       size: sampleValues,
       color: otuIDs,
-      colorscale: 'YlGnBu'
+      colorscale: "Jet"
     },
-    text: otuLabels,
-    type: 'scatter'
-  };
+    // type: 'scatter'
+  }
+];
 
-  let data = [traces];
+//   let plotData = [traces];
 
-  let layout = {
-    xaxis: {
-      title: 'OTU IDs'
-    },
-    yaxis: {
-      title: 'Sample Values'
-    }
+  var bubbleLayout = {
+    title: "Bacteria Cultures Per Sample",
+    margin: { t: 0 },
+    hovermode: "closest",
+    xaxis: { title: "OTU ID" },
+    margin: { t: 30}
   };
       
-  Plotly.newPlot("bubble-chart", data, layout);
-
+  Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+}
 
 // Create a bubble chart that displays each sample.
 
@@ -118,40 +117,7 @@ function init() {
   updateVisuals();  
 }
 
-
-
-
-//   Create a horizontal bar chart with a dropdown menu 
-//   to display the top 10 OTUs found in that individual.
-
-//   Use sample_values as the values for the bar chart.
-
-// const top10OTUs = data.sample_values.slice(0, 10);
-// //   Use otu_ids as the labels for the bar chart.
-// const top10OTUIds = data.otu_ids.slice(0, 10);
-// //   Use otu_labels as the hovertext for the chart.
-// const top10OTULabels = data.otu_labels.slice(0, 10);
-
-// Display the default plot
-// function barPrototype() {
-//     let data = [{
-//       values: top10OTUs,
-//       labels: top10OTUIds,
-//       type: "bar"
-//     }];
-  
-//     let layout = {
-//       height: 600,
-//       width: 800
-//     };
-  
-//     Plotly.newPlot("bar", data, layout);
-//   }
-  
 init();
   
-  // d3.json(url)
-  // .then(function(data) {   
-  // });
 
   
